@@ -27,12 +27,15 @@ class DetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        arguments.let { bundle ->
-            id = bundle?.getInt("id")
-        }
         binding = FragmentDetailsBinding.inflate(layoutInflater, container, false)
         viewModel = ViewModelProvider(this).get(DetailsViewModel::class.java)
-        // Inflate the layout for this fragment
+
+        arguments.let { bundle ->
+            id = bundle?.getInt("id")
+            val note = viewModel.findById(id!!)
+            Log.d("TAG", note.toString())
+        }
+
         return binding.root
     }
 

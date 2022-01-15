@@ -17,10 +17,11 @@ class DetailsViewModel: ViewModel() {
         }
     }
 
-    fun findById(id: Int): Note{
-        viewModelScope.async {
-            repository.findById(id)
+    fun findById(id: Int): Note? {
+        var note: Note? = null
+        viewModelScope.launch {
+            note = repository.findById(id)
         }
-
+        return note
     }
 }

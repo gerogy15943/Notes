@@ -17,7 +17,7 @@ class Repository {
             App.noteDao?.insert(note)
     }
 
-    suspend fun findById(id: Int) = withContext(Dispatchers.IO){
+    suspend fun findById(id: Int): Note? = withContext(Dispatchers.IO){
         App.noteDao?.findById(id)
     }
 
