@@ -48,8 +48,6 @@ class DetailsFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         val text = binding.editTextTextMultiLine.text.toString()
-        val count = binding.editTextTextMultiLine
-        Log.d("TAG", count.toString())
         if (note != null){
             note?.text = text
             viewModel.update(note!!)
@@ -58,6 +56,5 @@ class DetailsFragment : Fragment() {
             val note = Note(0, text, Date().time, false)
             viewModel.update(note)
         }
-        Log.d("TAG", "onPause")
     }
 }

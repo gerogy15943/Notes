@@ -25,6 +25,10 @@ class Repository {
         App.noteDao?.update(note)
     }
 
+    suspend fun delete(note: Note) = withContext(Dispatchers.IO){
+        App.noteDao?.delete(note)
+    }
+
     companion object{
         var instance: Repository? = null
 
