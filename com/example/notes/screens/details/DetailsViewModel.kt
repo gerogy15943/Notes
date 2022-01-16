@@ -1,5 +1,6 @@
 package com.example.notes.screens.details
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.notes.models.Note
@@ -17,11 +18,14 @@ class DetailsViewModel: ViewModel() {
         }
     }
 
-    fun findById(id: Int): Note? {
-        var note: Note? = null
+    fun update(note: Note) {
         viewModelScope.launch {
-            note = repository.findById(id)
+            repository.insert(note)
         }
+    }
+
+    suspend fun findById(id: Int?): Note? {
+        var note = repository.findById(id)
         return note
     }
 }

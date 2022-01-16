@@ -17,8 +17,12 @@ class Repository {
             App.noteDao?.insert(note)
     }
 
-    suspend fun findById(id: Int): Note? = withContext(Dispatchers.IO){
+    suspend fun findById(id: Int?): Note? = withContext(Dispatchers.IO){
         App.noteDao?.findById(id)
+    }
+
+    suspend fun update(note: Note) = withContext(Dispatchers.IO){
+        App.noteDao?.update(note)
     }
 
     companion object{

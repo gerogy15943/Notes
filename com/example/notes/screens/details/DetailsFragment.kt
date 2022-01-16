@@ -8,9 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.notes.R
 import com.example.notes.databinding.FragmentDetailsBinding
 import com.example.notes.models.Note
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 
 class DetailsFragment : Fragment() {
@@ -18,6 +22,7 @@ class DetailsFragment : Fragment() {
     lateinit var binding: FragmentDetailsBinding
     lateinit var viewModel: DetailsViewModel
     private var id: Int? = null
+    private var note: Note? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,18 +37,27 @@ class DetailsFragment : Fragment() {
 
         arguments.let { bundle ->
             id = bundle?.getInt("id")
-            val note = viewModel.findById(id!!)
-            Log.d("TAG", note.toString())
+            lifecycleScope.launch(Dispatchers.Main) {
+                note = viewModel.findById(id)
+                binding.editTextTextMultiLine.setText(note?.text)
+            }
         }
-
         return binding.root
     }
 
     override fun onPause() {
         super.onPause()
         val text = binding.editTextTextMultiLine.text.toString()
-        val note = Note(0, text, Date().time, false)
-        viewModel.insert(note)
-
+        val count = binding.editTextTextMultiLine
+        Log.d("TAG", count.toString())
+        if (note != null){
+            note?.text = text
+            viewModel.update(note!!)
+        }
+        else {
+            val note = Note(0, text, Date().time, false)
+            viewModel.update(note)
+        }
+        Log.d("TAG", "onPause")
     }
 }

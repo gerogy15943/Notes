@@ -10,10 +10,11 @@ data class Note(
     @PrimaryKey(autoGenerate = true)
     val uid: Int,
     @ColumnInfo(name = "text")
-    val text: String,
+    var text: String,
     @ColumnInfo(name = "time")
     val time: Long,
     @ColumnInfo(name = "done")
     val done: Boolean){
+
 
 }

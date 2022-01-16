@@ -14,7 +14,7 @@ interface NoteDao {
     fun getAllLiveData(): LiveData<List<Note>>
 
     @Query("SELECT * FROM note WHERE uid = :uid LIMIT 1")
-    fun findById(uid: Int): Note
+    fun findById(uid: Int?): Note
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(note: Note)
