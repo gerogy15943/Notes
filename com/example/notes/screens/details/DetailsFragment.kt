@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.example.notes.MainActivity
 import com.example.notes.R
 import com.example.notes.databinding.FragmentDetailsBinding
 import com.example.notes.models.Note
@@ -42,6 +43,7 @@ class DetailsFragment : Fragment() {
                 binding.editTextTextMultiLine.setText(note?.text)
             }
         }
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.actionbar_title)
         return binding.root
     }
 

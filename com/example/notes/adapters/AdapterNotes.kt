@@ -12,9 +12,20 @@ import com.example.notes.interfaces.ItemTouchHelperAdapter
 import com.example.notes.interfaces.RemoveItemAdapter
 import com.example.notes.models.Note
 
-class AdapterNotes(private val list: MutableList<Note>, val callbackItem: RemoveItemAdapter): RecyclerView.Adapter<AdapterNotes.ViewHolder>(), ItemTouchHelperAdapter {
+class AdapterNotes(val callbackItem: RemoveItemAdapter): RecyclerView.Adapter<AdapterNotes.ViewHolder>(), ItemTouchHelperAdapter {
 
     private val callback = callbackItem
+    private var list = ArrayList<Note>()
+
+
+    fun setData(listData: List<Note> ){
+        list.clear()
+        list.addAll(listData)
+    }
+
+    fun getData(): List<Note>{
+        return list
+    }
 
     class ViewHolder(private val binding: ItemNoteBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(note: Note) {
@@ -47,7 +58,7 @@ class AdapterNotes(private val list: MutableList<Note>, val callbackItem: Remove
 
     override fun onItemDismiss(position: Int) {
         callback.removePosition(list.get(position))
-        list.removeAt(position)
-        notifyItemRemoved(position)
+        //list.removeAt(position)
+        //notifyItemRemoved(position)
     }
 }

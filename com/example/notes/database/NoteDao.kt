@@ -1,6 +1,5 @@
 package com.example.notes.database
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.notes.models.Note

@@ -1,13 +1,12 @@
 package com.example.notes.helpers
 
+import android.util.Log
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notes.adapters.AdapterNotes
 import com.example.notes.interfaces.ItemTouchHelperAdapter
 
 class SimpleItemTouchHelperCallback(private val adapter: AdapterNotes) : ItemTouchHelper.Callback() {
-
-    private val mAdapter: ItemTouchHelperAdapter = adapter
 
     override fun getMovementFlags(
         recyclerView: RecyclerView,
@@ -31,6 +30,6 @@ class SimpleItemTouchHelperCallback(private val adapter: AdapterNotes) : ItemTou
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        mAdapter.onItemDismiss(viewHolder.adapterPosition)
+        adapter.onItemDismiss(viewHolder.adapterPosition)
     }
 }
